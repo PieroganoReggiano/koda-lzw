@@ -49,6 +49,7 @@ def compress(input_file, output_file):
                 code += 1
                 c = s
         else:
+            res.append(dictionary[c])
             break
 
     # przetworzenie wielkości słownika i wpisanie wszystkiego do pliku
@@ -123,31 +124,38 @@ def extract(input_file, output_file):
     bufbit = 0
     buffer = the_input.read(1)
     while True:
-        if verbosity >= 2:
-            sys.stderr.write("{}:{}\n".format(indexbit, bufbit))
+        if verbosity >= 4:
+            sys.stderr.write("Bit reading indexbit={}, bufbit={}".format(indexbit, bufbit))
         if buffer[0] & (2**bufbit):
             index |= (2**indexbit)
+            if verbosity >= 4:
+                sys.stderr.write(" 1")
+        elif verbosity >= 4:
+            sys.stderr.write(" 0")
         indexbit += 1
         bufbit += 1
         if indexbit >= index_size:
-            #sys.stderr.write("@")
+            if verbosity >= 4:
+                sys.stderr.write(" index={}".format(index))
 
             #######
 
             if index_old < 0: # odczytano dopiero pierwszy index
-                #sys.stderr.write("^")
+                if verbosity >= 4:
+                    sys.stderr.write(" first")
                 index_old = index
                 the_output.write(dictionary[index])
             else: # tu już normalnie
-                #sys.stderr.write("#")
                 text_old = dictionary[index_old]
                 if index in dictionary:
-                    #sys.stderr.write("$")
+                    if verbosity >= 4:
+                        sys.stderr.write(" normal")
                     dictionary[code] = text_old + dictionary[index][0:1]
                     code += 1
                     the_output.write(dictionary[index])
                 else: # sCsCs
-                    #sys.stderr.write("%")
+                    if verbosity >= 4:
+                        sys.stderr.write(" sCsCs")
                     dictionary[code] = text_old + text_old[0:1]
                     code += 1
                     the_output.write(text_old + text_old[0:1])
@@ -160,18 +168,20 @@ def extract(input_file, output_file):
             indexbit = 0
             symbol_count += 1
         if bufbit >= 8:
-            if verbosity >= 2:
-                #sys.stderr.write(". {}\n".format(indexbit))
+            if verbosity >= 4:
+                sys.stderr.write(" byte")
                 pass
             bufbit = 0
             buffer = the_input.read(1)
             if not buffer:
+                sys.stderr.write("\n")
                 break
+        sys.stderr.write("\n")
 
     if verbosity >= 1:
         sys.stderr.write("Symbol count: {}\n".format(symbol_count))
 
-    if verbosity >= 3:
+    if verbosity >= 5:
         sys.stderr.write("Słownik:\n")
         for k,v in dictionary.items():
             sys.stderr.write("{:4d} -> {}\n".format(k, v))
