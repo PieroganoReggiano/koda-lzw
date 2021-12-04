@@ -116,8 +116,6 @@ def extract(input_file, output_file):
     if verbosity >= 1:
         sys.stderr.write("Index size: {}\n".format(index_size))
 
-    #buffer = bytearray((index_length+7)//8)
-
     index_old = -1 # -1, więc mamy do odczytania pierwszy index, który jest trochę inaczej
     index = 0
     indexbit = 0
@@ -176,7 +174,8 @@ def extract(input_file, output_file):
             if not buffer:
                 sys.stderr.write("\n")
                 break
-        sys.stderr.write("\n")
+        if verbosity >= 4:
+            sys.stderr.write("\n")
 
     if verbosity >= 1:
         sys.stderr.write("Symbol count: {}\n".format(symbol_count))
