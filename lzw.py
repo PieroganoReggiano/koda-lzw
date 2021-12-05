@@ -2,7 +2,7 @@
 
 import sys
 import argparse
-
+import math
 
 
 verbosity = 0
@@ -187,7 +187,77 @@ def extract(input_file, output_file):
 
 
     return 0
+
+def entropy(input_file, block_size, condition_size):
+
+    if block_size > 1 and condition_size > 0:
+        raise Exception("Cannot use both block and conditional entropy at once")
+
+    if condition_size > 3:
+        raise Exception("Max condition entropy is 3")
+
+    the_input = None
+    if input_file == '-':
+        the_input = sys.stdin.buffer
+    else:
+        the_input = open(input_file, "rb")
+
+    entropy = 0.0
+
+    if condition_size <= 0:
+        occurrences = {}
+        allc = 0
+        while True:
+            chunk = the_input.read(block_size)
+            if chunk:
+                if chunk in occurrences:
+                    occurrences[chunk] += 1
+                else:
+                    occurrences[chunk] = 1
+                allc += 1
+            else:
+                break
+
+        for k,v in occurrences.items():
+            p = v/allc
+            one_entropy = -p * math.log2(p)
+            entropy += one_entropy
+            if verbosity >= 2:
+                sys.stderr.write("Symbol: {}, probability: {}, entropy: {}\n".format(k, p, one_entropy))
+    else:
+        context = b''
+        occurrences = {}
+        allc = 0
+        while True:
+            chunk = the_input.read(1)
+            if chunk:
+                if context in occurrences:
+                    occurrences[context]["count"] += 1
+                else:
+                    occurrences[context] = { "count": 1, "occurrences": {} }
+                if chunk in occurrences[context]["occurrences"]:
+                    occurrences[context]["occurrences"][chunk] += 1
+                else:
+                    occurrences[context]["occurrences"][chunk] = 1
+                allc += 1
+                context = context + chunk
+                context = context[-condition_size:]
+            else:
+                break
+
+        for k,v in occurrences.items():
+            sum = 0.0
+            for kk,vv in v["occurrences"].items():
+                p = vv/v["count"]
+                sum -= p * math.log2(p)
+            p = v["count"]/allc
+            entropy += p * sum
+
+    print(entropy)
+
         
+
+
 
 def main():
 
@@ -196,8 +266,13 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--compress', '-c', action='store', metavar="output-file", type=str, help="Compress input to file")
     group.add_argument('--extract', '-x', action='store', metavar="output-file", type=str, help="Decompress input to file")
+    group.add_argument('--entropy', '-e', action='store_true', help="Calculate entropy")
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
+
+    group2 = parser.add_mutually_exclusive_group()
+    group2.add_argument('--block-size', '-s', action='store', metavar="block-size", type=int, default=1, help="Set size of block entropy")
+    group2.add_argument('--condition-degree', '-C', action='store', metavar="degree", type=int, default=0, help="Set deegree of conditional entropy")
 
     args = parser.parse_args()
 
@@ -206,11 +281,23 @@ def main():
 
 
     if args.compress:
-        sys.stderr.write("Compression of '{}' to '{}'\n".format(args.input, args.compress))
+        if verbosity >= 1:
+            sys.stderr.write("Compression of '{}' to '{}'\n".format(args.input, args.compress))
         return compress(args.input, args.compress)
     elif args.extract:
-        sys.stderr.write("Decompression of '{}' to '{}'\n".format(args.input, args.extract))
+        if verbosity >= 1:
+            sys.stderr.write("Decompression of '{}' to '{}'\n".format(args.input, args.extract))
         return extract(args.input, args.extract)
+    elif args.entropy:
+        if verbosity >= 1:
+            sys.stderr.write("Calculation of entropy{}\n".format(
+                "" if args.block_size <=1 and args.condition_degree <= 0 else
+                " with block of size {}".format(args.block_size) if args.block_size > 1 else
+                " with condition {}".format(args.condition_degree)
+            ))
+        return entropy(args.input, args.block_size, args.condition_degree)
+    else:
+        parser.print_help()
 
 
 if __name__ == "__main__":
