@@ -29,7 +29,9 @@ def calculate_frequencies(file_name):
     content = bytearray(open(file_name, 'rb').read())
 
     freq, bins, patches = plt.hist(content, 256)
-    plt.xlabel("Symbol"); plt.ylabel("Frequency")
+    plt.xlabel("Symbol")
+    plt.ylabel("Frequency")
+    plt.title(f'Bytes frequencies in {file_name}')
     plt.grid(True)
     out = file_name + "_frequency.png"
     plt.savefig(out)
