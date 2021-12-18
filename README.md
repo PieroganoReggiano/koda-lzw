@@ -32,7 +32,7 @@ Wynikowy plik jest w postaci binarnej w następujący sposób:
 ./run_tests.sh
 ```
 
-Skrypt **run_tests.sh** pobiera dane testowe, a przeprowadza testy i obliczenia wymagane do przeprowadzenia analizy algorytmu:
+Skrypt **run_tests.sh** pobiera dane testowe, przeprowadza testy i obliczenia wymagane do przeprowadzenia analizy algorytmu:
 - Stopien kompresji
 - Procent kompresji
 - Entropa
