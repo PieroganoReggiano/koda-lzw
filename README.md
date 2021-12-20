@@ -66,7 +66,7 @@ File saved in data/uniform.pgm_frequency.png
 Dane generowane są bazowo o rozkładzie równomiernym o rozmiarze 1kB.
 
 ``` sh
-python3 .py -o <plik-wejściowy> [opcje]
+python3 generateData.py -o <plik-wejściowy> [opcje]
 ```
 
 ## Dostępne opcje
@@ -78,7 +78,7 @@ python3 .py -o <plik-wejściowy> [opcje]
 
 # Rysowanie Histogramu
 ``` sh
-python3 lzw.py -f <plik-wejściowy>
+python3 plotHistogram.py --filename <plik-wejściowy>
 ```
 
 
