@@ -27,7 +27,7 @@ Wynikowy plik jest w postaci binarnej w następujący sposób:
 * Kolejne indeksy symboli zapisane na kolejnych bitach w kolejności little endian. Ostatni 'niedokończony' bajt jest wypełniony zerami.
 
 
-#Generacja Danych
+# Generacja Danych
 Dane generowane są bazowo o rozkładzie równomiernym o rozmiarze 1kB.
 
 ``` sh
@@ -41,7 +41,7 @@ python3 .py -o <plik-wejściowy> [opcje]
 * `-l --laplace` -- obliczenie netropii i wypisanie na standardowe wyjście
 * `-n --normal` -- pokazywanie więcej informacji
 
-## Rysowanie Histogramu
+# Rysowanie Histogramu
 ``` sh
 python3 lzw.py -f <plik-wejściowy>
 ```
