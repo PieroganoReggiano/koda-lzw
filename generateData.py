@@ -4,7 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Data generation")
 parser.add_argument('-o', '--output', help='Output file name', required=True)
-parser.add_argument('-s', '--size', default=1024 ,help="File size in kB. Default: 1024 kB")
+parser.add_argument('-s', '--size', default=1024, help="File size in kB. Default: 1 kB")
 parser.add_argument('-l', '--laplace', action='store_true', help="Laplace distribution. Default: Uniform")
 parser.add_argument('-n', '--normal', action='store_true', help="Normal distribution. Default: Uniform")
 
@@ -13,7 +13,7 @@ parser.add_argument('-n', '--normal', action='store_true', help="Normal distribu
 args = parser.parse_args()
 
 
-size = args.size
+size = int(args.size) * 1024
 generator = None
 
 if args.normal:
