@@ -253,7 +253,9 @@ def entropy(input_file, block_size, condition_size):
             p = v["count"]/allc
             entropy += p * sum
 
-    print(entropy)
+    #print(entropy)
+    nb_symbols = len(occurrences.keys())
+    return entropy, nb_symbols
 
         
 
