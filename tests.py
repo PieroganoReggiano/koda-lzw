@@ -4,12 +4,12 @@ import filecmp
 from lzw import compress, extract, entropy
 import matplotlib.pyplot as plt
 
-def count_stopien_kompresji(original_size, compressed_size):
+def calculate_stopien_kompresji(original_size, compressed_size):
     result  = original_size/compressed_size
     print(f"Stopień kompresji: {result}")
     return result
 
-def procent_kompresji(original_size, compressed_size):
+def calculate_procent_kompresji(original_size, compressed_size):
     result = (original_size - compressed_size) / original_size
     print(f"Procent kompresji wynosi: {result}")
     return result
@@ -61,9 +61,9 @@ if __name__ == "__main__":
         print("Checking if the decompressed file is the same as the original one")
         assert True == filecmp.cmp(file, decompressed)
 
-        count_stopien_kompresji(file_size, compressed_size)
+        calculate_stopien_kompresji(file_size, compressed_size)
         
-        procent_kompresji(file_size, compressed_size)
+        calculate_procent_kompresji(file_size, compressed_size)
 
         print("Calculate entropy...")
 
