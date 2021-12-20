@@ -28,16 +28,24 @@ Wynikowy plik jest w postaci binarnej w następujący sposób:
 
 
 #Generacja Danych
+Dane generowane są bazowo o rozkładzie równomiernym o rozmiarze 1kB.
 
 ``` sh
 python3 .py -o <plik-wejściowy> [opcje]
 ```
 
 ## Dostępne opcje
-* `- o--compress|-c plik-wyjściowy` -- kompresja do podanego pliku
-* `--extract|-x plik-wyjściowy` -- dekompresja do pliku
-* `--entropy` -- obliczenie netropii i wypisanie na standardowe wyjście
-* `--verbose` -- pokazywanie więcej informacji
+
+* `-o --output plik-wyjściowy` --  kompresja do podanego pliku
+* `-s --size` --  rozmiar pliku w kB
+* `-l --laplace` -- obliczenie netropii i wypisanie na standardowe wyjście
+* `-n --normal` -- pokazywanie więcej informacji
+
+## Rysowanie Histogramu
+``` sh
+python3 lzw.py -f <plik-wejściowy>
+```
+
 
 
 
