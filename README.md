@@ -35,7 +35,7 @@ Wynikowy plik jest w postaci binarnej w następujący sposób:
 Skrypt **run_tests.sh** pobiera dane testowe, przeprowadza testy i obliczenia wymagane do przeprowadzenia analizy algorytmu:
 - Stopien kompresji
 - Procent kompresji
-- Entropa
+- Entropia
 - Przepływność
 - Generacja histogramu częstotliwości symboli w oryginalnych danych
 
