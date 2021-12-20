@@ -61,3 +61,28 @@ Plotting histogram...
 File saved in data/uniform.pgm_frequency.png
 ```
 
+
+# Generacja Danych
+Dane generowane są bazowo o rozkładzie równomiernym o rozmiarze 1kB.
+
+``` sh
+python3 .py -o <plik-wejściowy> [opcje]
+```
+
+## Dostępne opcje
+
+* `-o --output plik-wyjściowy` --  kompresja do podanego pliku
+* `-s --size` --  rozmiar pliku w kB
+* `-l --laplace` -- obliczenie netropii i wypisanie na standardowe wyjście
+* `-n --normal` -- pokazywanie więcej informacji
+
+# Rysowanie Histogramu
+``` sh
+python3 lzw.py -f <plik-wejściowy>
+```
+
+
+
+
+
+
