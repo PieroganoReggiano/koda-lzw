@@ -10,7 +10,7 @@ python3 lzw.py [opcje] <plik-wejściowy>
 
 * `--compress|-c plik-wyjściowy` -- kompresja do podanego pliku
 * `--extract|-x plik-wyjściowy` -- dekompresja do pliku
-* `--entropy` -- obliczenie netropii i wypisanie na standardowe wyjście
+* `--entropy` -- obliczenie entropii i wypisanie na standardowe wyjście
 * `--verbose` -- pokazywanie więcej informacji
 
 ### Opcje przy obliczaniu entropii
@@ -25,6 +25,7 @@ Z powyższych dwóch opcji można użyć tylko jednej
 Wynikowy plik jest w postaci binarnej w następujący sposób:
 * Czterobajtowy nagłówek składający się z długości indeksu w bitach zapisany w little endian.
 * Kolejne indeksy symboli zapisane na kolejnych bitach w kolejności little endian. Ostatni 'niedokończony' bajt jest wypełniony zerami.
+* Zakładamy, że bajt ma 8 bitów.
 
 ## Jak wywołać testy
 
