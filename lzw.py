@@ -82,7 +82,7 @@ def compress(input_file, output_file):
         buffer = buffer[0:((bufbit+7)//8)]
         the_output.write(buffer)
 
-    return 0
+    return 0, symbol_count
 
 def extract(input_file, output_file):
     the_input = None
@@ -254,8 +254,7 @@ def entropy(input_file, block_size, condition_size):
             entropy += p * sum
 
     #print(entropy)
-    nb_symbols = len(occurrences.keys())
-    return entropy, nb_symbols
+    return entropy
 
         
 
