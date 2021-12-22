@@ -44,8 +44,9 @@ Przykładowe logi:
 
 ``` 
 ### Processing data/uniform.pgm ###
-Compressing data/uniform.pgm of size 262159 bytes
-Decompressing data/uniform.pgm_compressed.lzw of size 361845 bytes
+Compressing data/uniform.pgm of size 2097272 bytes
+Przeplywnosc  18.000335785395823
+Decompressing data/uniform.pgm_compressed.lzw of size 2894760 bytes
 
 Checking if the decompressed file is the same as the input file
 Checking if the decompressed file is the same as the original one
@@ -53,11 +54,8 @@ Stopień kompresji: 0.7245063494037502
 Procent kompresji wynosi: -0.38025015353277974
 Calculate entropy...
 Block size: 1, Entropy: 7.9993194390339015
-Przeplywnosc  1413.45703125
-Block size: 2, Entropy: 15.58725121980441
-Przeplywnosc  6.395054964476335
-Block size: 3, Entropy: 16.4097526804257
-Przeplywnosc  4.151884064622728
+Block size: 2, Entropy: 7.793625609902205
+Block size: 3, Entropy: 5.469917560141901
 Plotting histogram...
 File saved in data/uniform.pgm_frequency.png
 ```
