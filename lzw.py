@@ -253,6 +253,7 @@ def entropy(input_file, block_size, condition_size):
             p = v["count"]/allc
             entropy += p * sum
 
+    entropy /= block_size
     #print(entropy)
     return entropy
 
