@@ -45,7 +45,7 @@ Przykładowe logi:
 ``` 
 ### Processing data/uniform.pgm ###
 Compressing data/uniform.pgm of size 2097272 bytes
-Przeplywnosc  18.000335785395823
+Przeplywnosc  11.042001228262238
 Decompressing data/uniform.pgm_compressed.lzw of size 2894760 bytes
 
 Checking if the decompressed file is the same as the input file
