@@ -37,8 +37,11 @@ def compress(input_file, output_file):
     if c == None:
         return 0
 
+    symbols_num = 0
     while True:
         s = the_input.read(1)
+        symbols_num += 1
+
         if s:
             if c + s in dictionary:
                 c += s
@@ -82,7 +85,8 @@ def compress(input_file, output_file):
         buffer = buffer[0:((bufbit+7)//8)]
         the_output.write(buffer)
 
-    return 0, symbol_count
+
+    return 0, symbols_num
 
 def extract(input_file, output_file):
     the_input = None
